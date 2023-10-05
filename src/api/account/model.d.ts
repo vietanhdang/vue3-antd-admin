@@ -7,17 +7,17 @@ declare namespace API {
     name: string;
     router: string;
     perms: string;
-    /** 当前菜单类型 0: 目录 | 1: 菜单 | 2: 权限 */
+    /** Loại menu hiện tại 0: Thư mục | 1: Menu | 2: Quyền hạn */
     type: 0 | 1 | 2;
     icon: string;
     orderNum: number;
     viewPath: string;
     keepalive: boolean;
     isShow: boolean;
-    /** 是否外链 */
+    /** Có phải là liên kết ngoại không */
     isExt?: boolean;
-    /** 外链打开方式
-     * 1: 新窗口打开
+    /** Chế độ mở liên kết ngoại
+     * 1: Mở trong cửa sổ mới
      * 2: iframe
      */
     openMode?: 1 | 2;

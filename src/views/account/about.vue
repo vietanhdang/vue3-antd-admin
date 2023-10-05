@@ -1,41 +1,42 @@
 <template>
   <div>
     <Card>
-      <Card.Meta title="关于">
+      <Card.Meta title="Thông tin về Ứng dụng">
         <template #description>
-          <BlankLink :url="pkg.author.url" :text="pkg.name" />的前端项目是基于Vue3.x、Vue-CLI5.x、
-          Ant-Design-Vue3.x 、TypeScript4.x开发，
-          内置了动态路由、权限验证、并提供了常用的功能组件，帮助你快速搭建企业级中后台产品原型。
-          原则上不会限制任何代码用于商用。
+          <BlankLink :url="pkg.author.url" :text="pkg.name" /> dự án frontend này được phát triển
+          dựa trên Vue 3.x, Vue-CLI 5.x, Ant-Design-Vue 3.x và TypeScript 4.x. Nó đã tích hợp định
+          tuyến động, xác thực quyền truy cập, và cung cấp các thành phần chức năng phổ biến để giúp
+          bạn xây dựng nhanh chóng nguyên mẫu sản phẩm trung tâm và sau trung tâm dành cho doanh
+          nghiệp. Về nguyên tắc, không giới hạn bất kỳ mã nào cho việc sử dụng thương mại.
         </template>
       </Card.Meta>
     </Card>
     <Card class="mt-3">
-      <Descriptions title="项目信息" :column="2" bordered>
-        <Descriptions.Item label="版本">
+      <Descriptions title="Thông tin Dự án" :column="2" bordered>
+        <Descriptions.Item label="Phiên bản">
           <Tag color="processing">{{ pkg.version }}</Tag>
         </Descriptions.Item>
-        <Descriptions.Item label="最后编译时间">
+        <Descriptions.Item label="Thời gian biên dịch gần nhất">
           <Tag color="processing">{{ lastBuildTime }}</Tag>
         </Descriptions.Item>
         <Descriptions.Item label="GitHub">
           <BlankLink :url="pkg.repository.url" text="GitHub" />
         </Descriptions.Item>
-        <Descriptions.Item label="预览地址">
-          <BlankLink :url="pkg.homepage" text="预览地址" />
+        <Descriptions.Item label="Liên kết Xem trước">
+          <BlankLink :url="pkg.homepage" text="Liên kết Xem trước" />
         </Descriptions.Item>
-        <Descriptions.Item label="QQ交流群" label-align="left" align="left">
+        <Descriptions.Item label="Nhóm trò chuyện QQ" label-align="left" align="left">
           <a
             href="https://qm.qq.com/cgi-bin/qm/qr?k=ID-KcAOdPUPWVgAnsPLF3gRdHLc8GURO&jump_from=webapi"
             target="_blank"
           >
-            点击链接加入群聊
+            Nhấp vào liên kết để tham gia cuộc trò chuyện nhóm
           </a>
         </Descriptions.Item>
       </Descriptions>
     </Card>
     <Card class="mt-3">
-      <Descriptions title="生产环境依赖" bordered>
+      <Descriptions title="Phụ thuộc trong Môi trường Sản phẩm" bordered>
         <template v-for="(value, key) in pkg.dependencies" :key="key">
           <Descriptions.Item :label="key">
             <BlankLink :url="key" :text="value" />
@@ -44,7 +45,7 @@
       </Descriptions>
     </Card>
     <Card class="mt-3">
-      <Descriptions title="开发环境依赖" bordered>
+      <Descriptions title="Phụ thuộc trong Môi trường Phát triển" bordered>
         <template v-for="(value, key) in pkg.devDependencies" :key="key">
           <Descriptions.Item :label="key">
             <BlankLink :url="key" :text="value" />

@@ -13,7 +13,6 @@ import router, { routes } from '@/router';
 import NotFound from '@/views/error/404.vue';
 import IFramePage from '@/components/basic/iframe-page';
 
-// 需要放在所有路由之后的路由
 const endRoutes: RouteRecordRaw[] = [REDIRECT_ROUTE, errorRoute, notFound];
 
 export function filterAsyncRoute(
@@ -109,16 +108,14 @@ export function filterAsyncRoute(
  */
 export const generatorDynamicRouter = (asyncMenus: API.Menu[]) => {
   try {
-    // console.log('asyncMenus', asyncMenus);
     const routeList = filterAsyncRoute(asyncMenus);
     const layout = routes.find((item) => item.name == 'Layout')!;
-    // console.log(routeList, '根据后端返回的权限路由生成');
-    // 给公共路由添加namePath
+
     generatorNamePath(common);
     const menus = [...common, ...routeList, ...endRoutes];
     layout.children = menus;
     const removeRoute = router.addRoute(layout);
-    // 获取所有没有包含children的路由，上面addRoute的时候，vue-router已经帮我们拍平了所有路由
+
     const filterRoutes = router
       .getRoutes()
       .filter(
@@ -131,20 +128,18 @@ export const generatorDynamicRouter = (asyncMenus: API.Menu[]) => {
     layout.children = [...filterRoutes];
     // 重新添加拍平后的路由
     router.addRoute(layout);
-    console.log('所有路由', router.getRoutes());
 
     return Promise.resolve({
       menus,
       routes: layout.children,
     });
   } catch (error) {
-    console.error('生成路由时出错', error);
     return Promise.reject(`生成路由时出错: ${error}`);
   }
 };
 
 /**
- * 主要方便于控制a-menu的open-keys，即控制左侧菜单应当展开哪些菜单
+ * Hàm này chủ yếu để điều khiển open-keys của a-menu, tức là điều khiển menu bên trái nên mở các menu nào
  * @param {RouteRecordRaw[]} routes 需要添加namePath的路由
  * @param {string[]} namePath
  */

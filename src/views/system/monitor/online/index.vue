@@ -1,8 +1,8 @@
 <template>
   <DynamicTable
     ref="dynamicTableRef"
-    header-title="在线用户"
-    title-tooltip="这是真实操作，请不要随意将其他用户踢下线。"
+    header-title="Người dùng trực tuyến"
+    title-tooltip="Đây là hoạt động thực sự, vui lòng không đuổi người dùng khác ra ngoài mạng một cách bất hợp pháp."
     :data-request="getOnlineList"
     :columns="columns"
   />
@@ -23,11 +23,11 @@
 
   useSocket({
     connect() {
-      // connect auto refresh
+      // Kết nối tự động làm tải lại
       dynamicTableInstance?.reload();
     },
     online() {
-      // online event auto refresh
+      // Sự kiện trực tuyến tự động làm tải lại
       dynamicTableInstance?.reload();
     },
     offline() {
@@ -46,48 +46,48 @@
       hideInSearch: true,
     },
     {
-      title: '用户名',
+      title: 'Tên người dùng',
       dataIndex: 'username',
       align: 'center',
       customRender: ({ record }) => (
         <div>
           <span class="pr-16px">{record.username}</span>
-          {record.isCurrent && <Tag color={'red'}>当前</Tag>}
+          {record.isCurrent && <Tag color={'red'}>Hiện tại</Tag>}
         </div>
       ),
     },
     {
-      title: '登录IP',
+      title: 'Địa chỉ IP đăng nhập',
       dataIndex: 'ip',
       width: 140,
       align: 'center',
     },
     {
-      title: '登录时间',
+      title: 'Thời gian đăng nhập',
       dataIndex: 'time',
       align: 'center',
     },
     {
-      title: '操作系统',
+      title: 'Hệ điều hành',
       dataIndex: 'os',
       align: 'center',
     },
     {
-      title: '浏览器',
+      title: 'Trình duyệt',
       dataIndex: 'browser',
       align: 'center',
     },
     {
-      title: '操作',
+      title: 'Hành động',
       dataIndex: 'ACTION',
       align: 'center',
       actions: ({ record }) => [
         {
-          label: '下线',
+          label: 'Đuổi ra ngoài',
           auth: 'sys.online.kick',
           disabled: record.disable,
           popConfirm: {
-            title: '确定下线该用户吗?',
+            title: 'Bạn có chắc muốn đuổi người dùng này ra khỏi mạng không?',
             onConfirm: () => handleKick(record),
           },
         },

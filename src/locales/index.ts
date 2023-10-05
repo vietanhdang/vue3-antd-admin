@@ -18,7 +18,7 @@ async function createI18nOptions() {
   return {
     locale,
     // legacy: false,
-    fallbackLocale: localeMap.zh_CN, // set fallback locale
+    fallbackLocale: localeMap.vi_VN,
     messages: {
       [locale]: message as { [key: string]: string },
     },

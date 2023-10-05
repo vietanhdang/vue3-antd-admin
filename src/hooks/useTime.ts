@@ -1,24 +1,24 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 /**
- * @description 获取本地时间
+ * @description Lấy thời gian cục bộ
  */
 export function useTime() {
-  let timer; // 定时器
-  const year = ref(0); // 年份
-  const month = ref(0); // 月份
-  const week = ref(''); // 星期几
-  const day = ref(0); // 天数
-  const hour = ref<number | string>(0); // 小时
-  const minute = ref<number | string>(0); // 分钟
-  const second = ref(0); // 秒
+  let timer; // Định thời
+  const year = ref(0); // Năm
+  const month = ref(0); // Tháng
+  const week = ref(''); // Thứ trong tuần
+  const day = ref(0); // Ngày
+  const hour = ref<number | string>(0); // Giờ
+  const minute = ref<number | string>(0); // Phút
+  const second = ref(0); // Giây
 
-  // 更新时间
+  // Cập nhật thời gian
   const updateTime = () => {
     const date = new Date();
     year.value = date.getFullYear();
     month.value = date.getMonth() + 1;
-    week.value = '日一二三四五六'.charAt(date.getDay());
+    week.value = 'Chủ nhật,Thứ hai,Thứ ba,Thứ tư,Thứ năm,Thứ sáu,Thứ bảy'.split(',')[date.getDay()];
     day.value = date.getDate();
     hour.value =
       `${date.getHours()}`?.padStart(2, '0') ||
@@ -29,8 +29,8 @@ export function useTime() {
     second.value = date.getSeconds();
   };
 
-  // 原生时间格式化
-  // new Intl.DateTimeFormat('zh', {
+  // Định dạng thời gian ban đầu
+  // new Intl.DateTimeFormat('vi', {
   //     year: 'numeric',
   //     month: '2-digit',
   //     day: '2-digit',

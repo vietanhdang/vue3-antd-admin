@@ -1,14 +1,14 @@
 <template>
   <div class="sys-server-stat-container">
     <!-- runtime -->
-    <Card class="stat-card" title="运行环境">
+    <Card class="stat-card" title="Môi trường chạy">
       <Descriptions :column="1" :label-style="{ width: '50%' }">
-        <Descriptions.Item label="操作系统">{{ runtime.os }}</Descriptions.Item>
-        <Descriptions.Item label="系统架构">{{ runtime.arch }}</Descriptions.Item>
-        <Descriptions.Item label="Node版本">
+        <Descriptions.Item label="Hệ điều hành">{{ runtime.os }}</Descriptions.Item>
+        <Descriptions.Item label="Kiến trúc hệ thống">{{ runtime.arch }}</Descriptions.Item>
+        <Descriptions.Item label="Phiên bản Node">
           <Tag color="processing" size="small">v{{ runtime.nodeVersion }}</Tag>
         </Descriptions.Item>
-        <Descriptions.Item label="NPM版本">
+        <Descriptions.Item label="Phiên bản NPM">
           <Tag color="processing" size="small">v{{ runtime.npmVersion }}</Tag>
         </Descriptions.Item>
       </Descriptions>
@@ -16,8 +16,8 @@
     <!-- CPU -->
     <Card class="stat-card" title="CPU">
       <Descriptions :column="1" :label-style="{ width: '50%' }" :content-style="{ width: '50%' }">
-        <Descriptions.Item label="详细">{{ parseCpuInfo }}</Descriptions.Item>
-        <Descriptions.Item label="负载">
+        <Descriptions.Item label="Thông tin chi tiết">{{ parseCpuInfo }}</Descriptions.Item>
+        <Descriptions.Item label="Tải CPU">
           <Progress
             :percent="
               formarPercentage(cpu.rawCurrentLoad, cpu.rawCurrentLoadIdle + cpu.rawCurrentLoad)
@@ -28,7 +28,7 @@
         <Descriptions.Item
           v-for="(item, index) in cpu.coresLoad"
           :key="index"
-          :label="`核心${index + 1} 负载`"
+          :label="`Tải nhân CPU ${index + 1}`"
         >
           <Progress
             :percent="formarPercentage(item.rawLoad, item.rawLoad + item.rawLoadIdle)"
@@ -38,12 +38,18 @@
       </Descriptions>
     </Card>
     <!-- disk -->
-    <Card class="stat-card" title="磁盘">
+    <Card class="stat-card" title="Ổ đĩa">
       <div class="disk-info">
         <Descriptions class="disk-info--item" :column="1">
-          <Descriptions.Item label="总空间">{{ formatDiskUnit.size }}</Descriptions.Item>
-          <Descriptions.Item label="已用空间">{{ formatDiskUnit.used }}</Descriptions.Item>
-          <Descriptions.Item label="可用空间">{{ formatDiskUnit.available }}</Descriptions.Item>
+          <Descriptions.Item label="Dung lượng tổng cộng">{{
+            formatDiskUnit.size
+          }}</Descriptions.Item>
+          <Descriptions.Item label="Dung lượng đã sử dụng">{{
+            formatDiskUnit.used
+          }}</Descriptions.Item>
+          <Descriptions.Item label="Dung lượng còn trống">{{
+            formatDiskUnit.available
+          }}</Descriptions.Item>
         </Descriptions>
         <div class="disk-info--item">
           <Progress
@@ -55,13 +61,17 @@
         </div>
       </div>
     </Card>
-    <!-- memoty -->
-    <Card class="stat-card" title="内存">
+    <!-- memory -->
+    <Card class="stat-card" title="Bộ nhớ">
       <div class="disk-info">
         <Descriptions class="disk-info--item" :column="1">
-          <Descriptions.Item label="总内存">{{ formatMemoryUnit.total }}</Descriptions.Item>
-          <Descriptions.Item label="已用内存">{{ formatMemoryUnit.used }}</Descriptions.Item>
-          <Descriptions.Item label="可用内存">{{ formatMemoryUnit.free }}</Descriptions.Item>
+          <Descriptions.Item label="Tổng bộ nhớ">{{ formatMemoryUnit.total }}</Descriptions.Item>
+          <Descriptions.Item label="Bộ nhớ đã sử dụng">{{
+            formatMemoryUnit.used
+          }}</Descriptions.Item>
+          <Descriptions.Item label="Bộ nhớ còn trống">{{
+            formatMemoryUnit.free
+          }}</Descriptions.Item>
         </Descriptions>
         <div class="disk-info--item">
           <Progress

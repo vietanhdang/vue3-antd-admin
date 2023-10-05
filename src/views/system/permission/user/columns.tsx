@@ -6,33 +6,33 @@ export type TableColumnItem = TableColumn<TableListItem>;
 
 export const baseColumns: TableColumnItem[] = [
   {
-    title: '头像',
+    title: 'Ảnh đại diện',
     width: 80,
     dataIndex: 'headImg',
     hideInSearch: true,
     customRender: ({ record }) => <Avatar src={record.headImg} />,
   },
   {
-    title: '姓名',
+    title: 'Họ và tên',
     width: 120,
     dataIndex: 'name',
     align: 'center',
   },
   {
-    title: '用户名',
+    title: 'Tên người dùng',
     width: 120,
     align: 'center',
     dataIndex: 'username',
   },
   {
-    title: '所在部门',
+    title: 'Bộ phận',
     dataIndex: 'departmentName',
     hideInSearch: true,
     align: 'center',
     width: 180,
   },
   {
-    title: '所属角色',
+    title: 'Vai trò',
     dataIndex: 'roleNames',
     align: 'center',
     hideInSearch: true,
@@ -48,32 +48,32 @@ export const baseColumns: TableColumnItem[] = [
     ),
   },
   {
-    title: '呢称',
+    title: 'Biệt danh',
     width: 120,
     align: 'center',
     hideInSearch: true,
     dataIndex: 'nickName',
   },
   {
-    title: '邮箱',
+    title: 'Email',
     width: 120,
     align: 'center',
     dataIndex: 'email',
   },
   {
-    title: '手机',
+    title: 'Điện thoại',
     width: 120,
     align: 'center',
     dataIndex: 'phone',
   },
   {
-    title: '备注',
+    title: 'Ghi chú',
     width: 120,
     align: 'center',
     dataIndex: 'remark',
   },
   {
-    title: '状态',
+    title: 'Trạng thái',
     dataIndex: 'status',
     width: 100,
     hideInSearch: true,
@@ -82,11 +82,11 @@ export const baseColumns: TableColumnItem[] = [
       componentProps: {
         options: [
           {
-            label: '启用',
+            label: 'Kích hoạt',
             value: 1,
           },
           {
-            label: '禁用',
+            label: 'Tắt',
             value: 0,
           },
         ],
@@ -94,11 +94,11 @@ export const baseColumns: TableColumnItem[] = [
     },
     customRender: ({ record }) => {
       const isEnable = record.status === 1;
-      return <Tag color={isEnable ? 'success' : 'red'}>{isEnable ? '启用' : '禁用'}</Tag>;
+      return <Tag color={isEnable ? 'success' : 'red'}>{isEnable ? 'Kích hoạt' : 'Tắt'}</Tag>;
     },
   },
   {
-    title: '创建时间',
+    title: 'Thời gian tạo',
     dataIndex: 'createdAt',
     width: 120,
     hideInSearch: true,
@@ -110,7 +110,7 @@ export const baseColumns: TableColumnItem[] = [
     },
   },
   {
-    title: '修改时间',
+    title: 'Thời gian sửa',
     dataIndex: 'updatedAt',
     width: 120,
     hideInSearch: true,

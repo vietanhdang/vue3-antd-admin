@@ -9,7 +9,7 @@ export const useModal = () => {
   let _modalInstance: ComponentInternalInstance;
   const modalRef = ref<MyModalInstance>();
   const appContext = _app?._context || getCurrentInstance()?.appContext;
-  // 当前模态框是否处于App.vue上下文中
+  // Xác định xem hộp thoại hiện tại có nằm trong ngữ cảnh của App.vue không
   const isAppChild = ref(false);
 
   const getModalInstance = async () => {

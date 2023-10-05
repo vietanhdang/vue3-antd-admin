@@ -31,10 +31,9 @@
     </Space>
     <Space :size="20">
       <Search />
-      <Tooltip :title="$t('layout.header.tooltipLock')" placement="bottom">
-        <LockOutlined @click="lockscreenStore.setLock(true)" />
+      <Tooltip :title="$t('layout.header.tooltipEntryFull')" placement="bottom">
+        <FullScreen />
       </Tooltip>
-      <FullScreen />
       <LocalePicker />
       <Dropdown placement="bottomRight">
         <Avatar :src="userInfo.headImg" :alt="userInfo.name">{{ userInfo.name }}</Avatar>
@@ -68,7 +67,6 @@
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     PoweroffOutlined,
-    LockOutlined,
   } from '@ant-design/icons-vue';
   import {
     Layout,
@@ -86,7 +84,6 @@
   import { LocalePicker } from '@/components/basic/locale-picker';
   import { useUserStore } from '@/store/modules/user';
   import { useKeepAliveStore } from '@/store/modules/keepAlive';
-  import { useLockscreenStore } from '@/store/modules/lockscreen';
   import { LOGIN_NAME } from '@/router/constant';
   import { TitleI18n } from '@/components/basic/title-i18n';
   import { useThemeStore } from '@/store/modules/projectConfig';
@@ -102,7 +99,6 @@
   const emit = defineEmits(['update:collapsed']);
   const userStore = useUserStore();
   const themeStore = useThemeStore();
-  const lockscreenStore = useLockscreenStore();
   const keepAliveStore = useKeepAliveStore();
 
   const router = useRouter();
@@ -129,7 +125,7 @@
         {
           name: '__index',
           meta: {
-            title: '首页',
+            title: 'Trang chủ',
           },
           children: userStore.menus,
         },
@@ -183,17 +179,16 @@
   // 退出登录
   const doLogout = () => {
     Modal.confirm({
-      title: '您确定要退出登录吗？',
+      title: 'Bạn có chắc chắn bạn muốn thoát?',
       icon: <QuestionCircleOutlined />,
       centered: true,
       onOk: async () => {
-        // 如果不是rootadmin，则退出登录
         if (userStore.userInfo.phone !== '13553550634') {
           // logout({})
           await userStore.logout();
         }
         keepAliveStore.clear();
-        // 移除标签页
+
         localStorage.clear();
         message.success('成功退出登录');
         await nextTick();

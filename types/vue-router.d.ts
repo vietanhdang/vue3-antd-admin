@@ -10,40 +10,40 @@ declare global {
 
 declare module 'vue-router' {
   interface RouteMeta extends VRouteMeta {
-    /** 标题 */
+    /** Tiêu đề */
     title: string | Title18n;
-    /** 当前菜单类型 0: 目录 | 1: 菜单 | 2: 权限 */
+    /** Loại menu hiện tại 0: Thư mục | 1: Menu | 2: Quyền hạn */
     type?: 0 | 1 | 2;
-    /** 当前路由权限 */
+    /** Quyền hạn của tuyến đường hiện tại */
     perms?: PermissionType[];
-    /** 是否需要缓存 */
+    /** Có cần lưu trữ tạm thời hay không */
     keepAlive?: boolean;
-    /** 当前路由namePath 祖先name集合 */
+    /** Danh sách tên của tuyến đường cấp cha */
     namePath?: string[];
-    /** 当前路由所在的完整路径 */
+    /** Đường dẫn đầy đủ của tuyến đường hiện tại */
     fullPath?: string;
-    /** 是否固定在标签栏 */
+    /** Cố định trên thanh thẻ */
     affix?: boolean;
-    /** 菜单图标 */
+    /** Biểu tượng của menu */
     icon?: string;
-    /** 当前页面切换动画 */
+    /** Tên chuyển đổi khi chuyển trang */
     transitionName?: string | false;
-    /** @name 在菜单中隐藏子节点 */
+    /** @name Ẩn các menu con trong menu */
     hideChildrenInMenu?: boolean;
-    /** 不在菜单中显示 */
+    /** Ẩn khỏi menu */
     hideInMenu?: boolean;
-    /** 不在面包屑导航中显示 */
+    /** Ẩn khỏi dấu breadcrumb */
     hideInBreadcrumb?: boolean;
-    /** 不在tab标签页中显示 */
+    /** Ẩn khỏi tab trên thanh thẻ */
     hideInTabs?: boolean;
-    /** 设置当前路由高亮的菜单项，值为route fullPath或route name,一般用于详情页 */
+    /** Đặt menu cha sẽ được tô đậm khi tuyến đường hiện tại được chọn, thường được sử dụng cho các trang chi tiết */
     activeMenu?: string;
-    /** 菜单排序号 */
+    /** Số thứ tự của menu */
     orderNum?: number;
-    /** 是否外链 */
+    /** Liên kết ngoại */
     isExt?: boolean;
-    /** 外链打开方式
-     * 1: 新窗口打开
+    /** Chế độ mở liên kết ngoại
+     * 1: Mở trong cửa sổ mới
      * 2: iframe
      */
     openMode?: 1 | 2;

@@ -1,18 +1,17 @@
-/** 用户token */
+/** Mã thông tin token của người dùng */
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 
-/** 国际化 */
+/** Mã ngôn ngữ */
 export const LOCALE_KEY = 'LOCALE__';
 
-/** 主题色 */
+/** Mã màu chủ đề */
 export const THEME_KEY = 'THEME__';
 
-/** 用户信息 */
+/** Mã thông tin người dùng */
 export const USER_INFO_KEY = 'USER__INFO__';
 
-// role info key
+// Mã thông tin vai trò
 export const ROLES_KEY = 'ROLES__KEY__';
-/** 是否锁屏 */
-export const IS_LOCKSCREEN = 'IS_LOCKSCREEN';
-/** 标签页 */
+
+/** Mã trang nhãn */
 export const TABS_ROUTES = 'TABS_ROUTES';

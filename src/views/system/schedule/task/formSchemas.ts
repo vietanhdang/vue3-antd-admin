@@ -4,7 +4,7 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
   {
     field: 'type',
     component: 'RadioGroup',
-    label: '名称',
+    label: 'Loại',
     defaultValue: 0,
     rules: [{ required: true, type: 'number' }],
     componentProps: {
@@ -14,7 +14,7 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
           value: 0,
         },
         {
-          label: '时间间隔',
+          label: 'Khoảng thời gian',
           value: 1,
         },
       ],
@@ -23,30 +23,30 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
   {
     field: 'name',
     component: 'Input',
-    label: '任务名称',
+    label: 'Tên công việc',
     rules: [{ required: true, type: 'string' }],
   },
   {
     field: 'service',
     component: 'Input',
-    label: '服务路径',
+    label: 'Đường dẫn dịch vụ',
     rules: [{ required: true, type: 'string' }],
     componentProps: {
-      placeholder: '请输入调用服务的路径',
+      placeholder: 'Nhập đường dẫn dịch vụ cần gọi',
     },
   },
   {
     field: 'data',
     component: 'Input',
-    label: '任务参数',
+    label: 'Tham số công việc',
     componentProps: {
-      placeholder: '请输入任务参数（可不填）',
+      placeholder: 'Nhập tham số công việc (không bắt buộc)',
     },
   },
   {
     field: 'limit',
     component: 'InputNumber',
-    label: '执行次数',
+    label: 'Số lần thực hiện',
     defaultValue: -1,
     componentProps: {
       min: -1,
@@ -62,13 +62,13 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
     rules: [{ required: true, type: 'string' }],
     vIf: ({ formModel }) => formModel.type === 0,
     componentProps: {
-      placeholder: '请输入Cron表达式',
+      placeholder: 'Nhập biểu thức Cron',
     },
   },
   {
     field: 'every',
     component: 'InputNumber',
-    label: '执行间隔',
+    label: 'Khoảng thời gian thực hiện',
     defaultValue: 60000,
     vIf: ({ formModel }) => formModel.type === 1,
     rules: [{ required: true, type: 'number' }],
@@ -82,7 +82,7 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
   {
     field: 'startTime',
     component: 'DatePicker',
-    label: '开始时间',
+    label: 'Thời gian bắt đầu',
     vIf: ({ formModel }) => formModel.type === 0,
     componentProps: {
       showTime: true,
@@ -94,7 +94,7 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
   {
     field: 'endTime',
     component: 'DatePicker',
-    label: '结束时间',
+    label: 'Thời gian kết thúc',
     vIf: ({ formModel }) => formModel.type === 0,
     componentProps: {
       showTime: true,
@@ -106,21 +106,21 @@ export const taskSchemas: FormSchema<API.SysTaskAddParams>[] = [
   {
     field: 'remark',
     component: 'InputTextArea',
-    label: '备注',
+    label: 'Ghi chú',
   },
   {
     field: 'status',
     component: 'RadioGroup',
     defaultValue: 1,
-    label: '状态',
+    label: 'Trạng thái',
     componentProps: {
       options: [
         {
-          label: '运行',
+          label: 'Đang chạy',
           value: 1,
         },
         {
-          label: '停止',
+          label: 'Dừng',
           value: 0,
         },
       ],

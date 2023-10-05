@@ -38,9 +38,9 @@ export function useI18n(namespace?: string): {
 }
 
 /**
- * 国际化转换工具函数，主要用于处理动态路由的title
+ * Chuyển đổi tiện ích i18n, chủ yếu được sử dụng để xử lý tiêu đề động của tuyến đường
  * @param {string | Title18n} message message
- * @param isI18n  默认为true，获取对应的翻译文本,否则返回本身
+ * @param isI18n  Mặc định là true, lấy văn bản dịch tương ứng, nếu không, trả lại chính nó
  * @returns message
  */
 export function transformI18n(message: string | Title18n = '', isI18n = true) {
@@ -48,7 +48,7 @@ export function transformI18n(message: string | Title18n = '', isI18n = true) {
     return '';
   }
 
-  // 处理动态路由的title, 格式 {zh_CN:"",en_US:""}
+  // Xử lý tiêu đề động của tuyến đường, định dạng {zh_CN:"",en_US:""}
   if (typeof message === 'object') {
     return message[i18n.global?.locale];
   }
@@ -59,5 +59,5 @@ export function transformI18n(message: string | Title18n = '', isI18n = true) {
   return message;
 }
 
-// 主要用于配合vscode i18nn ally插件的提示。此功能仅用于路由和菜单。请在其他地方使用 vue-i18n 的 useI18n
+// Chủ yếu được sử dụng để kết hợp với tiện ích gợi ý vscode i18n ally. Chức năng này chỉ được sử dụng cho tuyến đường và menu. Vui lòng sử dụng useI18n của vue-i18n ở những nơi khác.
 export const t = (key: string) => key;

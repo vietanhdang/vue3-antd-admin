@@ -1,5 +1,5 @@
 /**
- * @description: 请求结果集
+ * @description: Kết quả yêu cầu
  */
 export enum ResultEnum {
   SUCCESS = 0,
@@ -9,7 +9,7 @@ export enum ResultEnum {
 }
 
 /**
- * @description: 请求方法
+ * @description: Phương thức yêu cầu
  */
 export enum RequestEnum {
   GET = 'GET',
@@ -20,15 +20,15 @@ export enum RequestEnum {
 }
 
 /**
- * @description:  常用的contentTyp类型
+ * @description: Loại ContentType thường dùng
  */
 export enum ContentTypeEnum {
   // json
   JSON = 'application/json;charset=UTF-8',
   // json
   TEXT = 'text/plain;charset=UTF-8',
-  // form-data 一般配合qs
+  // form-data thường kết hợp với qs
   FORM_URLENCODED = 'application/x-www-form-urlencoded;charset=UTF-8',
-  // form-data  上传
+  // form-data tải lên
   FORM_DATA = 'multipart/form-data;charset=UTF-8',
 }

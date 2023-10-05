@@ -4,6 +4,7 @@ dist
 .npmrc
 .cache
 .fleet
+.husky
 
 tests/server/static
 tests/server/static/upload

@@ -2,7 +2,7 @@
   <div>
     <DynamicTable
       row-key="id"
-      header-title="定时任务"
+      header-title="Công việc theo định kỳ"
       :data-request="getSysTaskList"
       :columns="columns"
       :scroll="{ x: 2000 }"
@@ -10,39 +10,39 @@
     >
       <template #toolbar>
         <a-button type="primary" :disabled="!$auth('sys.task.add')" @click="openTaskModal({})">
-          新增
+          Thêm mới
         </a-button>
       </template>
       <template #expandedRowRender="{ record }">
         <Descriptions :column="1">
-          <Descriptions.Item label="任务编号"># {{ record.id }}</Descriptions.Item>
-          <Descriptions.Item label="执行次数">
-            {{ record.limit > 0 ? `仅 ${record.limit} 次` : '无次数限制' }}
+          <Descriptions.Item label="Mã công việc"># {{ record.id }}</Descriptions.Item>
+          <Descriptions.Item label="Số lần thực hiện">
+            {{ record.limit > 0 ? `Chỉ ${record.limit} lần` : 'Không giới hạn lần thực hiện' }}
           </Descriptions.Item>
-          <Descriptions.Item v-if="record.type === 1" label="执行间隔">
-            每{{ record.every }}毫秒执行一次
+          <Descriptions.Item v-if="record.type === 1" label="Khoảng thời gian thực hiện">
+            Mỗi {{ record.every }} mili giây thực hiện một lần
           </Descriptions.Item>
-          <Descriptions.Item v-else label="Cron表达式">
+          <Descriptions.Item v-else label="Biểu thức Cron">
             <Tooltip>
-              <template #title>秒 分 小时 日期 月份 星期 年(可选)</template>
+              <template #title>Giây Phút Giờ Ngày Tháng Tuần Năm (tùy chọn)</template>
               {{ record.cron }}
             </Tooltip>
           </Descriptions.Item>
-          <Descriptions.Item v-if="record.type === 0" label="执行时间段">
+          <Descriptions.Item v-if="record.type === 0" label="Thời gian thực hiện">
             <span>{{ parseExecTime(record) }}</span>
           </Descriptions.Item>
-          <Descriptions.Item label="执行操作">
+          <Descriptions.Item label="Thao tác thực hiện">
             <Popconfirm
-              title="确认手动执行一次该任务吗?"
+              title="Xác nhận thực hiện công việc này một lần?"
               :disabled="!$auth('sys.task.once')"
               @confirm="handleOnce(record)"
             >
               <Button type="link" size="small" :disabled="!$auth('sys.task.once')">
-                <template #icon><ToolOutlined /></template>仅一次
+                <template #icon><ToolOutlined /></template>Chỉ một lần
               </Button>
             </Popconfirm>
             <Popconfirm
-              title="确认运行该任务吗?"
+              title="Xác nhận chạy công việc này?"
               :disabled="!$auth('sys.task.start') || !(record.status === 0)"
               @confirm="handleStart(record)"
             >
@@ -51,11 +51,11 @@
                 size="small"
                 :disabled="!$auth('sys.task.start') || !(record.status === 0)"
               >
-                <template #icon><CaretRightOutlined /></template>运行
+                <template #icon><CaretRightOutlined /></template>Chạy
               </Button>
             </Popconfirm>
             <Popconfirm
-              title="确认停止该任务吗?"
+              title="Xác nhận dừng công việc này?"
               :disabled="!$auth('sys.task.stop') || !(record.status === 1)"
               @confirm="handleStop(record)"
             >
@@ -64,7 +64,7 @@
                 size="small"
                 :disabled="!$auth('sys.task.stop') || !(record.status === 1)"
               >
-                <template #icon><PoweroffOutlined /></template>停止
+                <template #icon><PoweroffOutlined /></template>Dừng
               </Button>
             </Popconfirm>
           </Descriptions.Item>
@@ -107,19 +107,19 @@
   const reload = () => dynamicTableInstance?.reload();
 
   /**
-   * @description 打开新增/编辑弹窗
+   * @description Mở cửa sổ thêm mới / chỉnh sửa
    */
   const openTaskModal = async (record: Partial<TableListItem>) => {
     const [formRef] = await showModal({
       modalProps: {
-        title: `${record.id ? '编辑' : '新增'}任务`,
+        title: `${record.id ? 'Chỉnh sửa' : 'Thêm mới'} công việc`,
         width: 640,
         onFinish: async (values) => {
           const params = {
             ...values,
             id: record.id,
           };
-          console.log('新增/编辑任务', params);
+          console.log('Thêm mới / chỉnh sửa công việc', params);
           await (record.id ? sysTaskUpdate : sysTaskAdd)(params);
           reload();
         },
@@ -130,7 +130,7 @@
       },
     });
 
-    // 如果是编辑的话，需要获取任务详情
+    // Nếu là chỉnh sửa, cần lấy chi tiết công việc
     if (record.id) {
       const data = await getSysTaskInfo({ id: record.id });
 
@@ -163,13 +163,13 @@
 
   const parseExecTime = (record: TableListItem) => {
     if (!record.startTime && !record.endTime) {
-      return '无时段限制';
+      return 'Không giới hạn thời gian';
     }
     if (!record.startTime && record.endTime) {
-      return `无开始时间限制 - ${record.endTime}`;
+      return `Không giới hạn thời gian bắt đầu - ${record.endTime}`;
     }
     if (record.startTime && !record.endTime) {
-      return `${record.startTime} - 长期有效`;
+      return `${record.startTime} - Không giới hạn thời gian kết thúc`;
     }
     return `${record.startTime} - ${record.endTime}`;
   };
@@ -177,14 +177,14 @@
   const columns: TableColumnItem[] = [
     ...baseColumns,
     {
-      title: '操作',
+      title: 'Thao tác',
       width: 220,
       dataIndex: 'ACTION',
       align: 'center',
       fixed: 'right',
       actions: ({ record }) => [
         {
-          label: '编辑',
+          label: 'Chỉnh sửa',
           auth: {
             perm: 'sys.task.update',
             effect: 'disable',
@@ -192,10 +192,10 @@
           onClick: () => openTaskModal(record),
         },
         {
-          label: '删除',
+          label: 'Xóa',
           auth: 'sys.task.delete',
           popConfirm: {
-            title: '你确定要删除吗？',
+            title: 'Bạn có chắc chắn muốn xóa không?',
             onConfirm: () => delRowConfirm(record.id),
           },
         },

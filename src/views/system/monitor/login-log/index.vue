@@ -1,6 +1,6 @@
 <template>
   <DynamicTable
-    header-title="登录日志"
+    header-title="Nhật ký đăng nhập"
     auto-height
     :data-request="loadTableData"
     :columns="columns"
@@ -25,24 +25,24 @@
 
   const columns: TableColumn[] = [
     {
-      title: '用户名',
+      title: 'Tên người dùng',
       dataIndex: 'username',
       width: 280,
       align: 'center',
     },
     {
-      title: '登录IP',
+      title: 'Địa chỉ IP đăng nhập',
       dataIndex: 'ip',
       width: 150,
       align: 'center',
     },
     {
-      title: '登录地点',
+      title: 'Địa điểm đăng nhập',
       dataIndex: 'loginLocation',
       align: 'center',
     },
     {
-      title: '登录时间',
+      title: 'Thời gian đăng nhập',
       dataIndex: 'time',
       align: 'center',
       formItemProps: {
@@ -53,12 +53,12 @@
       },
     },
     {
-      title: '操作系统',
+      title: 'Hệ điều hành',
       dataIndex: 'os',
       align: 'center',
     },
     {
-      title: '浏览器',
+      title: 'Trình duyệt',
       dataIndex: 'browser',
       align: 'center',
     },

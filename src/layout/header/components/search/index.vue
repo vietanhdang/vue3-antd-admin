@@ -3,7 +3,7 @@
     <slot><SearchOutlined @click="visible = true" /></slot>
     <DraggableModal
       v-model:visible="visible"
-      title="搜索菜单"
+      title="Tìm kiếm menu"
       :keyboard="false"
       @cancel="handleClose"
     >
@@ -11,7 +11,7 @@
         ref="inputRef"
         v-model:value="keyword"
         clearable
-        placeholder="请输入关键词搜索"
+        placeholder="Nhập từ khóa tìm kiếm"
         @change="handleSearch"
       >
         <template #prefix>
@@ -19,7 +19,7 @@
         </template>
       </a-input>
       <div class="mt-20px">
-        <Empty v-if="resultOptions.length === 0" description="暂无搜索结果" />
+        <Empty v-if="resultOptions.length === 0" description="Không có kết quả tìm kiếm" />
         <search-result
           v-else
           v-model:value="activePath"
@@ -60,13 +60,13 @@
 
   watch(visible, async (val) => {
     if (val) {
-      /** 自动聚焦 */
+      /** Tự động trỏ chuột vào ô tìm kiếm */
       await nextTick();
       inputRef.value?.focus();
     }
   });
 
-  /** 查询 */
+  /** Tìm kiếm */
   function search() {
     resultOptions.value = menusList.value.filter((menu) => {
       const title = transformI18n(menu.meta?.title);
@@ -82,11 +82,11 @@
     }
   }
 
-  /** 将路由转换成菜单列表 */
+  /** Chuyển đổi các route thành danh sách menu */
   function transformRouteToList(routes: RouteRecordRaw[], treeMap: RouteRecordRaw[] = []) {
     if (routes && routes.length === 0) return [];
     return routes.reduce((acc, cur) => {
-      /** 允许在菜单内显示并且无子路由 */
+      /** Cho phép hiển thị trong menu và không có route con */
       if (!cur.meta?.hideInMenu && !cur.children) {
         acc.push(cur);
       }
@@ -99,14 +99,14 @@
 
   function handleClose() {
     visible.value = false;
-    /** 延时处理防止用户看到某些操作 */
+    /** Xử lý bất đồng bộ để ngăn người dùng thấy một số thao tác */
     setTimeout(() => {
       resultOptions.value = [];
       keyword.value = '';
     }, 200);
   }
 
-  /** key up */
+  /** Xử lý key Up */
   function handleUp() {
     const { length } = resultOptions.value;
     if (length === 0) return;
@@ -118,7 +118,7 @@
     }
   }
 
-  /** key down */
+  /** Xử lý key Down */
   function handleDown() {
     const { length } = resultOptions.value;
     if (length === 0) return;
@@ -130,7 +130,7 @@
     }
   }
 
-  /** key enter */
+  /** Xử lý key Enter */
   function handleEnter() {
     const { length } = resultOptions.value;
     if (length === 0 || activePath.value === '') return;
@@ -147,4 +147,5 @@
   onKeyStroke('ArrowUp', handleUp);
   onKeyStroke('ArrowDown', handleDown);
 </script>
+
 <style lang="less" scoped></style>

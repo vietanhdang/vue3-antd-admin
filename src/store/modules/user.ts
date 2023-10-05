@@ -44,7 +44,7 @@ export const useUserStore = defineStore({
     },
   },
   actions: {
-    /** 清空token及用户信息 */
+    /** reset token */
     resetToken() {
       this.avatar = this.token = this.name = '';
       this.perms = [];
@@ -52,13 +52,15 @@ export const useUserStore = defineStore({
       this.userInfo = {};
       Storage.clear();
     },
-    /** 登录成功保存token */
+
+    /** set token */
     setToken(token: string) {
       this.token = token ?? '';
       const ex = 7 * 24 * 60 * 60 * 1000;
       Storage.set(ACCESS_TOKEN_KEY, this.token, ex);
     },
-    /** 登录 */
+
+    /** login */
     async login(params: API.LoginParams) {
       try {
         const { data } = await login(params);
@@ -68,16 +70,121 @@ export const useUserStore = defineStore({
         return Promise.reject(error);
       }
     },
-    /** 登录成功之后, 获取用户信息以及生成权限路由 */
+
+    /** Hàm này sẽ được gọi sau khi login thành công */
     async afterLogin() {
       try {
         const wsStore = useWsStore();
-        const [userInfo, { perms, menus }] = await Promise.all([getInfo(), permmenu()]);
+        const [userInfo, { perms }] = await Promise.all([getInfo(), permmenu()]);
         this.perms = perms;
         this.name = userInfo.name;
         this.avatar = userInfo.headImg;
         this.userInfo = userInfo;
-        // 生成路由
+        // SỬA LẠI MENU Ở ĐÂY
+        const menus = [
+          {
+            createTime: new Date('2020-08-28 10:09:26'),
+            updateTime: new Date('2021-12-08 14:51:06'),
+            id: 1,
+            parentId: null,
+            name: 'Hệ thống',
+            router: '/sys',
+            perms: null,
+            type: 0,
+            icon: 'icon-shezhi',
+            orderNum: 255,
+            viewPath: null,
+            keepalive: true,
+            isShow: true,
+            isExt: false,
+            openMode: 1,
+          },
+          {
+            createTime: new Date('2020-08-01 00:00:00'),
+            updateTime: new Date('2023-06-11 10:17:23'),
+            id: 3,
+            parentId: 1,
+            name: 'Quản lý quyền',
+            router: '/sys/quyen',
+            perms: null,
+            type: 0,
+            icon: 'icon-quanxian',
+            orderNum: 0,
+            viewPath: '',
+            keepalive: true,
+            isShow: true,
+            isExt: false,
+            openMode: 1,
+          },
+          {
+            createTime: new Date('2020-08-08 00:00:00'),
+            updateTime: new Date('2023-06-11 10:16:02'),
+            id: 4,
+            parentId: 3,
+            name: 'Danh sách người dùng',
+            router: '/sys/quyen/nguoidung',
+            perms: null,
+            type: 1,
+            icon: 'icon-yonghu',
+            orderNum: 0,
+            viewPath: 'system/permission/user/index.vue',
+            keepalive: true,
+            isShow: true,
+            isExt: false,
+            openMode: 1,
+          },
+          {
+            createTime: new Date('2020-08-08 00:00:00'),
+            updateTime: new Date('2023-06-11 10:16:02'),
+            id: 7,
+            parentId: 3,
+            name: 'Danh sách menu',
+            router: '/sys/quyen/menu',
+            perms: null,
+            type: 1,
+            icon: 'icon-tiaoxingtu',
+            orderNum: 0,
+            viewPath: 'system/permission/menu/index.vue',
+            keepalive: true,
+            isShow: true,
+            isExt: false,
+            openMode: 1,
+          },
+          {
+            createTime: new Date('2020-09-04 09:41:43'),
+            updateTime: new Date('2023-06-11 10:16:02'),
+            id: 23,
+            parentId: 3,
+            name: 'Danh sách vai trò',
+            router: '/sys/quyen/vaitro',
+            perms: '',
+            type: 1,
+            icon: 'icon-jiaosequanxian',
+            orderNum: 0,
+            viewPath: 'system/permission/role/index.vue',
+            keepalive: true,
+            isShow: true,
+            isExt: false,
+            openMode: 1,
+          },
+          {
+            createTime: new Date('2023-09-28 16:09:25'),
+            updateTime: new Date('2023-09-28 16:09:25'),
+            id: 314,
+            parentId: null,
+            name: 'Nhật ký truy cập',
+            router: '/sys2/nguoidung',
+            perms: null,
+            type: 1,
+            icon: 'icon-yonghu',
+            orderNum: 255,
+            viewPath: 'system/monitor/login-log/index.vue',
+            keepalive: true,
+            isShow: true,
+            isExt: false,
+            openMode: 1,
+          },
+        ] as API.Menu[];
         const generatorResult = await generatorDynamicRouter(menus);
         this.menus = generatorResult.menus.filter((item) => !item.meta?.hideInMenu);
         !wsStore.client && wsStore.initSocket();
@@ -88,7 +195,8 @@ export const useUserStore = defineStore({
         // return this.logout();
       }
     },
-    /** 登出 */
+
+    /** Hàm này sẽ được gọi để logout */
     async logout() {
       await logout();
       const wsStore = useWsStore();
@@ -99,7 +207,6 @@ export const useUserStore = defineStore({
   },
 });
 
-// 在组件setup函数外使用
 export function useUserStoreWithOut() {
   return useUserStore(store);
 }

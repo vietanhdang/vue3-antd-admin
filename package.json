@@ -23,7 +23,6 @@
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint \"**/*.{vue,css,less.scss}\" --fix --cache --cache-location node_modules/.cache/stylelint/",
-    "lint:lint-staged": "lint-staged",
     "prepare": "husky install",
     "reinstall": "rimraf yarn.lock && rimraf package.lock.json && rimraf node_modules && npm run dev",
     "release": "git push && git push origin --tags",
